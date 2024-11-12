@@ -16,7 +16,7 @@ class AuthController extends Controller
         ]);
 
         if(Auth::attempt($fields, $request->remember_me)){
-            return redirect()->route('home');
+            return redirect()->intended('dashboard');
         }else{
             return back()->withErrors(['Failed' => 'Your credentials are incorrect.']);
         }
@@ -34,5 +34,17 @@ class AuthController extends Controller
         User::create($field);
 
         return redirect()->route('register')->with('Success', 'Registration Successful! You can now login.');
+    }
+
+    public function logout(Request $request){
+        
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+
     }
 }

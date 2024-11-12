@@ -20,7 +20,15 @@ Route::view('/', 'pages.home')->name('home');
 Route::view('/login', 'auth.login')->name('login');
 Route::view('/register', 'auth.register')->name('register');
 
-Route::get('/dashboard',[ DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->group(function(){
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/dashboard',[ DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+# Note we can use middleware buy firs creating:
+# Creating middleware logic in http / middleware - create
+# then Apply that into the app.php the middlware
+# then we will going to call that here in routes

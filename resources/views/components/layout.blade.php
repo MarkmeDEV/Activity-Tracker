@@ -15,11 +15,11 @@
 </head>
 <body class="flex">
     @auth
-        <aside class="w-[20rem] h-screen bg-slate-900 fixed left-0 top-0 p-5 flex flex-col justify-between">
+        <aside class="hidden w-[20rem] h-screen bg-slate-900 fixed left-0 top-0 p-5 lg:flex flex-col justify-between">
         <div class="flex flex-col gap-5">
             <a href="{{ route('dashboard') }}" class="text-white font-bold text-2xl">Power Usage</a>
             <div class="flex flex-col gap-3 mt-10">
-                <a href="#" class="flex items-center gap-3 text-white text-lg font-primary hover:bg-slate-700/30 p-5 rounded-md">
+                <a href="dashboard" class="flex items-center gap-3 text-white text-lg font-primary hover:bg-slate-700/30 p-5 rounded-md">
                     <i class="ri-dashboard-fill"></i>
                     <span class="font-bold">Dashboard</span>
                 </a>

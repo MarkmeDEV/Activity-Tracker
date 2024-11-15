@@ -18,6 +18,15 @@ class MoveInFactory extends Factory
     {
         return [
             //
+            'user_id' => 1,
+            'fullname'=>fake()->name(),
+            'email' => fake()->safeEmail(),
+            'phone' =>fake()->phoneNumber(),
+            'rental_type' =>fake()->randomElement(['Inquiry', 'Move In']),
+            'marketing_desc'=>fake()->randomElement(['Facebook', 'Web Search', 'Poster', 'Referral']),
+            'cancelled'=>fake()->date(),
+            'date' => fake()->dateTime()
+
         ];
     }
 }

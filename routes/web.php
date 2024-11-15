@@ -24,7 +24,7 @@ Route::middleware('guest')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
-    Route::redirect('/movein', 'pages.movein');
+    // Route::redirect('/movein', 'pages.movein');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 });

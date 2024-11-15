@@ -23,9 +23,9 @@
                     <i class="ri-dashboard-fill"></i>
                     <span class="font-bold">Dashboard</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 text-white text-lg font-primary hover:bg-slate-700/30 p-5 rounded-md">
+                <a href="{{ route('movein.index') }}" class="flex items-center gap-3 text-white text-lg font-primary hover:bg-slate-700/30 p-5 rounded-md">
                     <i class="ri-import-fill"></i>
-                    <span class="font-bold">Import File</span>
+                    <span class="font-bold">Move In</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 text-white text-lg font-primary hover:bg-slate-700/30 p-5 rounded-md">
                     <i class="ri-user-settings-fill"></i>

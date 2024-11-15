@@ -10,11 +10,12 @@ class MoveIn extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'fullname',
         'email',
         'phone',
-        'rental type',
-        'marketing desc',
+        'rental_type',
+        'marketing_desc',
         'cancelled',
         'date',
     ];

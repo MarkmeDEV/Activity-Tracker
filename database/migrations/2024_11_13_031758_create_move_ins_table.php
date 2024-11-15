@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('fullname');
             $table->string('email');
-            $table->bigInteger('phone');
-            $table->string('rental type');
-            $table->string('marketing desc');
-            $table->date('Date');
+            $table->string('phone', 20);
+            $table->string('rental_type');
+            $table->string('marketing_desc');
+            $table->date('date');
             $table->date('cancelled');
             $table->timestamps();
         });

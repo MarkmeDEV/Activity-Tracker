@@ -37,7 +37,7 @@ class MoveInController extends Controller
      */
     public function store(StoreMoveInRequest $request)
     {
-        //
+        dd($request->all()); 
     }
 
     /**

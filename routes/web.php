@@ -24,12 +24,11 @@ Route::middleware('guest')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
-    // Route::redirect('/movein', 'pages.movein');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('movein', MoveInController::class);
 });
 
-Route::resource('movein', MoveInController::class);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 

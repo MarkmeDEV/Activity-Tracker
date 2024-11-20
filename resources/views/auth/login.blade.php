@@ -46,31 +46,7 @@
             </form>  
         </div>
     </div>
-    @error('Failed')
-        <div id="errorModal" class="fixed top-5 right-5 flex items-start justify-end">
-            <div 
-                data-aos="fade-left"
-                class="relative w-[35rem] border-l-4 border-red-700 rounded-md shadow-lg bg-white flex items-center gap-2 p-4 bg-red-200">
-                
-                <div class="absolute bottom-0 right-0 w-full h-1 bg-red-300 overflow-hidden">
-                    <div id="progressBar" class="h-full bg-red-600" style="width: 0;"></div>
-                </div>
-
-                <div class="w-10 h-10 flex items-center justify-center p-2 rounded-full bg-red-500 cursor-pointer hover:scale-[1.01]">
-                    <i class="fa-solid fa-check text-white"></i>
-                </div>
-                <h1 class="text-slate-800 font-primary">{{ $message }}</h1>
-            </div>
-        </div>
-
-        <script>
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.transition = 'width 3s linear'; 
-            progressBar.style.width = '100%';
-            function closeModal() {
-                document.getElementById('errorModal').style.display = 'none';
-            }
-            setTimeout(closeModal, 3000);
-        </script>
-    @enderror
+    @if($errors->has('Failed'))
+        <x-modal-message type="error" :message="$errors->first('Failed')" />
+    @endif
 </x-layout>

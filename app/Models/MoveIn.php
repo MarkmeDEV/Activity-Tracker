@@ -18,6 +18,10 @@ class MoveIn extends Model
         'marketing_desc',
         'cancelled',
         'date',
+        'created_at',
+        'update_at'
     ];
+
+    public $timestamps = true;
 
 }

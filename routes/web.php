@@ -29,8 +29,8 @@ Route::middleware('auth')->group(function(){
     Route::resource('movein', MoveInController::class);
 });
 
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 
 # Note we can use middleware buy firs creating:

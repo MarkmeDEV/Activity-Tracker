@@ -33,7 +33,7 @@ class AuthController extends Controller
 
         User::create($field);
 
-        return redirect()->route('register')->with('Success', 'Registration Successful! You can now login.');
+        return redirect()->route('register')->with('success', 'Registration Successful! You can now login.');
     }
 
     public function logout(Request $request){

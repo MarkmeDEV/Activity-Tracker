@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('rental_type');
             $table->string('marketing_desc');
             $table->date('date');
-            $table->date('cancelled');
+            $table->string('cancelled')->nullable();  
             $table->timestamps();
         });
     }

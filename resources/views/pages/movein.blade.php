@@ -1,68 +1,87 @@
 <x-layout>
-    <div class="w-full flex items-center mt-10 flex-col gap-5">
-        <div class="flex flex-col items-center"> 
-            <h1 class="font-primary text-2xl font-semibold">Upload the move in file </h1>
-            <p class="font-primary text-gray-400">Drag or click the box inside to upload a file</p>
-        </div>
-        <div class="flex items-center justify-center w-full max-w-[50rem] mt-10">
-            <form class="w-full" method="POST" enctype="multipart/form-data" action="{{ route('movein.store') }}">
-                @csrf
-                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-200 transition-all ease-in-out">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                        </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">.CSV with UTF-8 or Without (MAX. 2MB)</p>
-                    </div>
-                    <input id="dropzone-file" type="file" name="csv_file" class="hidden" accept=".csv" />
-                </label>
-
-                <div id="uploaded-file-info" class="mt-5 w-full max-w-[50rem] p-4 bg-gray-100 rounded-md flex justify-between items-center hidden">
-                    <div>
-                        <h2 class="font-primary text-lg font-semibold mb-2">Uploaded File</h2>
-                        <p id="file-name" class="text-gray-600"></p>
-                    </div>
-                    <button id="remove-file-button" class="text-red-500 font-semibold hover:text-red-700 transition-all ease-in-out">
-                        Remove
-                    </button>
+    <div class="w-full grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div class="w-full h-full rounded-md p-5 bg-white shadow-lg">
+            <div class="flex items-start justify-between">
+                <h3 class="font-primary text-slate-800 text-xl font-bold">Total Move in</h3>
+                <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center">
+                    <i class="ri-archive-fill text-slate-800 text-xl"></i>
                 </div>
-
-                <button class="mt-10 w-full bg-slate-800 p-2 text-white font-primary rounded-md hover:bg-slate-900/80 transition-all ease-in-out">
-                    Submit
-                </button>
-            </form>
-        </div> 
+            </div>
+            <h1 class="text-3xl font-primary font-extrabold mb-3">300</h1>
+            <small class="px-3 bg-slate-300 p-1 font-primary rounded-md animate-pulse">Person</small>
+        </div>
+    </div>
+    <div class="w-full my-5 flex items-center justify-end">
+        <a 
+        href="{{ route('list') }}"
+        class="px-5 py-2 bg-slate-800 text-white flex items-center gap-2 rounded-md font-primary text-sm hover:bg-slate-900
+        transition-all ease-in-out">
+            <i class="ri-file-list-3-fill text-white"></i>
+            Import New Move In
+        </a>
+    </div>
+    <div class="relative overflow-x-auto bg-white">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+            <thead class="text-sm text-gray-700 uppercase bg-gray-50 bg-slate-800">
+                <tr>
+                    <th scope="col" class="px-6 py-4 text-white font-primary rounded-tl-lg">
+                        Fullname
+                    </th>
+                    {{-- <th scope="col" class="px-6 py-4 text-white font-primary">
+                        Email
+                    </th> --}}
+                    <th scope="col" class="px-6 py-4 text-white font-primary">
+                        Phone
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-white font-primary">
+                        Marketing Desc
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-white font-primary">
+                        Move In Date
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-white font-primary rounded-tr-lg">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($moveIn as $movein)
+                    <tr class="border-b border-gray-200 hover:bg-gray-300 cursor-pointer" onclick="getId({{$movein->id}})">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            {{ str_replace('"', '', $movein->fullname) }}
+                        </th>
+                        {{-- <td class="px-6 py-4">
+                            {{ $movein->email }}
+                        </td> --}}
+                        <td class="px-6 py-4">
+                            {{ $movein->phone }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $movein->marketing_desc }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ \Carbon\Carbon::parse($movein->date)->toFormattedDateString() }}
+                        </td>
+                        <td class="px-6 py-4 flex items-center gap-3">
+                            <a href="#" class="text-slate-800 text-2xl border border-gray-200 rounded-md px-2 py-1 hover:bg-slate-800 transition-all ease-in-out hover:text-white">
+                                <i class="ri-edit-box-fill"></i>
+                            </a>
+                            <a href="#" class="text-red-500 text-2xl border border-gray-200 rounded-md px-2 py-1 hover:bg-red-500 transition-all ease-in-out hover:text-white">
+                                <i class="ri-delete-bin-fill"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+                
+            </tbody>
+        </table>
+        <div class="mt-10 p-5">
+            {{ $moveIn->links() }}
+        </div>
     </div>
     <script>
-        const fileInput = document.getElementById('dropzone-file');
-        const fileInfo = document.getElementById('uploaded-file-info');
-        const fileNameDisplay = document.getElementById('file-name');
-        const removeButton = document.getElementById('remove-file-button');
-    
-        fileInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                // Show file information
-                fileNameDisplay.textContent = `File Name: ${file.name}`;
-                fileInfo.classList.remove('hidden');
-            }
-        });
-    
-        removeButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Reset file input
-            fileInput.value = '';
-            // Hide file information
-            fileInfo.classList.add('hidden');
-            // Clear displayed file name
-            fileNameDisplay.textContent = '';
-        });
+        function getId(id){
+            console.log(id);
+        }
     </script>
-    @if(session('success'))
-        <x-modal-message type="success" :message="session('success')" />
-    @endif
-    @if($errors->has('csv_file'))
-        <x-modal-message type="error" :message="$errors->first('csv_file')" />
-    @endif
 </x-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MoveIn;
 use App\Http\Requests\StoreMoveInRequest;
 use App\Http\Requests\UpdateMoveInRequest;
+use Carbon\Carbon;
 
 class MoveInController extends Controller
 {
@@ -17,7 +18,7 @@ class MoveInController extends Controller
     {
         //
         
-        $moveIn = MoveIn::all();
+        $moveIn = MoveIn::latest()->paginate(5);
 
         // dd($moveIn);
         return view('pages.movein', ['moveIn' => $moveIn]);
@@ -53,18 +54,19 @@ class MoveInController extends Controller
             if(($handle = fopen($filepath, 'r')) !== false){
 
                 $header = fgetcsv($handle);
-
+                
+                // dd($handle);
                 while (($data = fgetcsv($handle)) !== false) {
                     // Insert the data into the database
                     MoveIn::create([
-                        'user_id'         => $data[0],  // Assuming user_id is the first column in CSV
-                        'fullname'        => $data[1],  // Fullname is the second column, and so on...
-                        'email'           => $data[2],
-                        'phone'           => $data[3],
-                        'rental_type'     => $data[4],
-                        'marketing_desc'  => $data[5],
-                        'date'            => $data[6],  // Ensure this matches the date format in the CSV
-                        'cancelled'       => $data[7],  // Assuming the 'cancelled' column is a boolean or integer
+                        'user_id'         => 1,  // Assuming user_id is the first column in CSV
+                        'fullname'        => $data[0] ?? null,  // Fullname is the second column, and so on...
+                        'email'           => $data[1] ?? null,
+                        'phone'           => $data[2] ?? null,
+                        'rental_type'     => $data[3] ?? null,
+                        'marketing_desc'  => $data[4] ?? null,
+                        'date'            => $data[5]   ?? null,  // Ensure this matches the date format in the CSV
+                        'cancelled'       => $data[6] ?? null,  // Assuming the 'cancelled' column is a boolean or integer
                         'created_at'      => now(),     // Set the created_at timestamp to current time
                         'updated_at'      => now(),     // Set the updated_at timestamp to current time
                     ]);
@@ -72,7 +74,7 @@ class MoveInController extends Controller
                 fclose($handle); // Close the file handle after processing
                 
             } 
-            return redirect()->route('movein')->with('success', 'File uploaded and data inserted.');
+            return redirect()->route('movein.index')->with('success', 'File uploaded and data inserted.');
 
         }
 

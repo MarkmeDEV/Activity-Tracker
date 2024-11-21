@@ -2,7 +2,7 @@
 <x-layout>
 
     <div class="w-full flex justify-center mt-10">
-        <div class="w-[35rem] shadow-lg border rounded-md border-gray-200 py-5 flex flex-col px-10">
+        <div class="w-[35rem] bg-white shadow-lg border rounded-md border-gray-200 py-5 flex flex-col px-10">
             <div class="flex flex-col items-center">
                 <h1 class="font-bold font-primary text-slate-800 text-2xl">Sign In</h1>
                 <p class="font-primary text-gray-600">Sign in to view the kwh dashboard</p>
@@ -46,6 +46,7 @@
             </form>  
         </div>
     </div>
+    
     @if($errors->has('Failed'))
         <x-modal-message type="error" :message="$errors->first('Failed')" />
     @endif

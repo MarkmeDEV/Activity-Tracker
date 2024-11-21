@@ -70,7 +70,7 @@
                 @endauth
             </div>
         </header>
-        <main class="p-5">
+        <main class="p-5 bg-gray-200">
             {{ $slot }}
         </main>
     </div>

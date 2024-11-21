@@ -19,7 +19,7 @@ class MoveIn extends Model
         'cancelled',
         'date',
         'created_at',
-        'update_at'
+        'updated_at'
     ];
 
     public $timestamps = true;

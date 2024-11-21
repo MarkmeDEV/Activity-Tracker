@@ -79,9 +79,23 @@
             {{ $moveIn->links() }}
         </div>
     </div>
+
+    <div id="viewSelectedRow" class="w-full flex items-center justify-center h-screen absolute inset-0 bg-black/50 overflow-hidden" onclick="closeModal()">
+        <div class="w-[30rem] h-[40rem] mx-5 p-5 bg-white z-[99] rounded-md" onclick="event.stopPropagation();">
+            <h3></h3>
+        </div>
+    </div>
+
     <script>
+        const showModal = document.getElementById('viewSelectedRow');
+        
         function getId(id){
-            console.log(id);
+            showModal.classList.remove('hidden');
+            
+        }
+
+        function closeModal(){
+            return showModal.classList.add('hidden')
         }
     </script>
 </x-layout>

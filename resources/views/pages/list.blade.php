@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="w-full flex items-center mt-10 flex-col gap-5">
+    <div class="w-full h-screen flex items-center mt-10 flex-col gap-5">
         <div class="flex flex-col items-center"> 
             <h1 class="font-primary text-2xl font-semibold">Upload the move in file </h1>
             <p class="font-primary text-gray-400">Drag or click the box inside to upload a file</p>
